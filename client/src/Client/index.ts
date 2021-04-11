@@ -1,4 +1,5 @@
 import { Socket } from "socket.io-client";
+import { nanoid } from "nanoid";
 import {
   SocketRequest,
   SocketMessageBody,
@@ -10,13 +11,24 @@ function wrapEmit<R extends SocketMessageBody = SocketMessageBody>(
   message: SocketRequest
 ): Promise<R> {
   return new Promise<R>((resolve, reject) => {
-    socket.emit("request", message, (response: SocketErrorMessage | R) => {
-      if ("error" in response) {
-        reject(response);
+    const requestId = nanoid();
+    socket.emit(
+      "request",
+      {
+        ...message,
+        headers: {
+          ...message.headers,
+          "xxx-request-id": requestId,
+        },
+      },
+      (response: SocketErrorMessage | R) => {
+        if ("error" in response) {
+          reject(response);
+        }
+        console.log("response", response);
+        resolve(response as R);
       }
-      console.log("response", response)
-      resolve(response as R);
-    });
+    );
   });
 }
 

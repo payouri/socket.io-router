@@ -4,6 +4,10 @@ import {
 } from "../router/node_modules/socket.io/dist";
 import { MatchFunction } from "../router/node_modules/path-to-regexp";
 
+export type SocketRequestHeaders<
+  D extends Record<string | number | symbol, unknown> = {}
+> = { [k in keyof D]: D[k] };
+
 export type SocketRequestParams<
   D extends Record<string | number | symbol, unknown> = {}
 > = { [k in keyof D]: D[k] };
@@ -30,6 +34,7 @@ export type SocketResponse<
 export interface SocketRequest<
   B extends SocketMessageBody = SocketMessageBody
 > {
+  headers?: SocketRequestHeaders;
   path: string;
   body: B;
 }
@@ -38,9 +43,11 @@ export interface SocketRequestWithParams<
   B extends Omit<Record<string | number | symbol, unknown>, "error"> = {},
   P extends Record<string | number | symbol, unknown> = {}
 > {
-  server: SocketServer;
-  socket: Socket;
+  readonly server: SocketServer;
+  readonly socket: Socket;
+  readonly originalUrl: string;
   path: string;
+  headers: SocketRequestHeaders;
   body: SocketMessageBody<B>;
   params: SocketRequestParams<P>;
 }

@@ -4,7 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import cors from "cors";
 
 import { Router } from "../src/Router/index";
-import { SocketRequestWithParams } from "@commons/types";
+import { SocketRequestWithParams } from "../../commons/types";
 
 const mainSocketRouter = new Router({});
 
@@ -49,7 +49,8 @@ const r = new Router({
 });
 
 r.route("/:id", async (req: SocketRequestWithParams, res) => {
-  console.log(this)
+  req.socket.broadcast.to("dqdqsdqsdqs").emit("dsqdqsdqsdq")
+  
   res.send({
     //@ts-ignore
     test: req.params.id,

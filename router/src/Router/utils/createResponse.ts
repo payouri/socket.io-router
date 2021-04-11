@@ -1,4 +1,4 @@
-import { SocketMessageBody, SocketResponse } from "@commons/types";
+import {  SocketResponse } from "@commons/types";
 
 export const createResponse = (
   callback: SocketResponse["send"]

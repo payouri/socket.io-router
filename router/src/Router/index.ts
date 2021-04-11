@@ -20,6 +20,7 @@ import {
   SocketErrorMessage,
 } from "@commons/types";
 import createResponse from "./utils/createResponse";
+import { buildRequest } from "./utils/buildRequest";
 
 const routerDefaultOptions: DefaultRouterOptions = {
   mountPath: "/",
@@ -75,12 +76,12 @@ export const Router = (function Router(
           const { params } = match;
           const handler = this.handlers[index];
           let nextCalled = false;
-          req = {
-            ...reqWithoutParams,
-            params,
-            server: this.socketServer,
+          req = buildRequest(
+            this.socketServer,
             socket,
-          };
+            reqWithoutParams,
+            params
+          );
           const next = async (err?: Error) => {
             if (err) {
               console.warn("err", err);
@@ -124,24 +125,7 @@ export const Router = (function Router(
     }
   };
 
-  const responseHandler = {
-    send: (response: SocketMessageBody) => {
-      console.log(response);
-    },
-  };
-
   const bindServer = (server: Server) => {
-    // const middleware = (events: any[], next: (error?: Error) => void) => {
-    //   console.log(events);
-
-    //   events.forEach((event) => {
-    //     console.log(event);
-    //     handle(event, responseHandler, nextHandler);
-    //   });
-
-    //   next();
-    // };
-    // socket.use(middleware);
     server.on("connect", (socket) => {
       socket.on("request", (message, callback) => {
         if (!("path" in message) || typeof message.path !== "string") {
