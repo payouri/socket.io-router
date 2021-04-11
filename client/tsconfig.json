@@ -1,0 +1,27 @@
+{
+  "exclude": ["./example/**/*"],
+  "compilerOptions": {
+    "target": "ES5",
+    "strict": true,
+    "module": "commonjs",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "src/",
+    "outDir": "dist/",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@commons/*": [
+        "../commons/*"
+      ]
+    },
+    "declaration": true,
+  },
+}
