@@ -7,8 +7,8 @@
     "clean": "rm -rf ./dist",
     "build": "tsc",
     "clean-build": "npm run clean && npm run build",
-    "prepublishOnly": "npm run clean && npm build",
-    "start:example": "nodemon --watch \"./\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node ./example/index.ts\""
+    "prepublishOnly": "npm run clean && npm run build",
+    "start:example": "npm run prepublishOnly && nodemon --watch \"./\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node ./example/index.ts\""
   },
   "dependencies": {
     "path-to-regexp": "^6.2.0"

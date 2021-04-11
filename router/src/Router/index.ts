@@ -19,6 +19,7 @@ import {
   SocketHandler,
   SocketErrorMessage,
 } from "@commons/types";
+import createResponse from "./utils/createResponse";
 
 const routerDefaultOptions: DefaultRouterOptions = {
   mountPath: "/",
@@ -55,7 +56,7 @@ export const Router = (function Router(
     socket,
     reqWithoutParams,
     res,
-    injectedNext,
+    injectedNext
   ): Promise<void> => {
     if (!this.socketServer) return;
 
@@ -119,27 +120,7 @@ export const Router = (function Router(
   ) => {
     if ("path" in message && typeof message.path === "string") {
       console.log("Request", message);
-      handle(socket, message, {
-        isSent: false,
-        send: function (responseBody) {
-          if (this.isSent) {
-            throw new Error("Response Already Sent");
-          }
-          this.isSent = true;
-          console.log("responseBody", responseBody);
-          callback(responseBody);
-        },
-        error: function (err) {
-          if (this.isSent) {
-            throw new Error("Response Already Sent");
-          }
-          this.isSent = true;
-          if (!this.isSent) {
-            callback(err);
-          }
-        },
-        end: () => {},
-      });
+      handle(socket, message, createResponse(callback));
     }
   };
 

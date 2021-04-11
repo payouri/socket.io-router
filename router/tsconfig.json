@@ -1,6 +1,7 @@
 {
   "exclude": [
-      "./node_modules"
+    "./example",
+    "./node_modules"
   ],
   "compilerOptions": {
     "target": "ES2020",
@@ -13,16 +14,15 @@
     "lib": [
       "es6",
     ],
-    "rootDir": "./src",
-    "outDir": "./dist",
+    "rootDir": "src/",
+    "outDir": "dist/",
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-        "@commons/*": [
-            "../commons/*"
-        ]
+      "@commons/*": [
+        "../commons/*"
+      ]
     },
-    "declaration": true,
-    "composite": true
+    "declaration": true
   },
 }

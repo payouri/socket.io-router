@@ -4,6 +4,7 @@ import { Server as SocketServer } from "socket.io";
 import cors from "cors";
 
 import { Router } from "../src/Router/index";
+import { SocketRequestWithParams } from "@commons/types";
 
 const mainSocketRouter = new Router({});
 
@@ -42,6 +43,20 @@ mainSocketRouter.route(
     });
   }
 );
+
+const r = new Router({
+  mountPath: "/test2",
+});
+
+r.route("/:id", async (req: SocketRequestWithParams, res) => {
+  console.log(this)
+  res.send({
+    //@ts-ignore
+    test: req.params.id,
+  });
+});
+
+mainSocketRouter.use(r);
 
 httpServer.listen(3000, () => {
   console.log("example http server running on port 3000");

@@ -4,12 +4,13 @@ import {
 } from "../router/node_modules/socket.io/dist";
 import { MatchFunction } from "../router/node_modules/path-to-regexp";
 
-export type SocketRequestParams = {};
+export type SocketRequestParams<
+  D extends Record<string | number | symbol, unknown> = {}
+> = { [k in keyof D]: D[k] };
 
-export type SocketMessageBody = Omit<
-  Record<string | number | symbol, unknown>,
-  "error"
->;
+export type SocketMessageBody<
+  D extends Omit<Record<string | number | symbol, unknown>, "error"> = {}
+> = { [k in keyof D]: D[k] };
 
 export type SocketErrorMessage = {
   error: "bad_request" | "not_found" | "unauthorized" | "unknown_error";
@@ -34,14 +35,14 @@ export interface SocketRequest<
 }
 
 export interface SocketRequestWithParams<
-  B extends SocketMessageBody = SocketMessageBody,
-  P extends SocketRequestParams = SocketRequestParams
+  B extends Omit<Record<string | number | symbol, unknown>, "error"> = {},
+  P extends Record<string | number | symbol, unknown> = {}
 > {
   server: SocketServer;
   socket: Socket;
   path: string;
-  body: B;
-  params: P;
+  body: SocketMessageBody<B>;
+  params: SocketRequestParams<P>;
 }
 
 export type NextHandlerCallback = (error?: Error) => Promise<void>;

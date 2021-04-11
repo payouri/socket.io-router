@@ -9,7 +9,7 @@ const client = Client(socketClient);
 console.log("dsqd");
 setInterval(async () => {
   const res = await client.request({
-    path: "/test",
+    path: "/test2/a",
     body: {
       truc: Math.random(),
     },

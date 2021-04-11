@@ -1,10 +1,7 @@
-import { match, MatchFunction } from "path-to-regexp";
 import {
   SocketHandlerFunction,
   RouterType,
-  SocketHandler,
 } from "@commons/types";
-import { Router } from "../";
 import handlerMatch from "../utils/match";
 import { handleRequest } from "./handleRequest";
 
@@ -12,7 +9,7 @@ export function useHandler(
   this: RouterType,
   fn: SocketHandlerFunction | SocketHandlerFunction[] | RouterType
 ): void {
-  if (fn instanceof Router) {
+  if ("handlers" in fn) {
     this.handlers.push(...fn.handlers);
   } else {
     this.handlers.push({
