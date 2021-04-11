@@ -1,11 +1,19 @@
 {
   "name": "@youri-kane/socket.io-router-client",
   "version": "0.0.1",
-  "description": "JavaScript and TypeScript example starter project",
+  "description": "Dedicated client for @youri-kane/socket.io-router package",
+  "author": {
+    "email": "pailloux.youri@gmail.com",
+    "name": "Youri",
+    "url": "https://youri-pailloux.xyz"
+  },
+  "engines": {
+    "node": "^12.0.0"
+  },
   "scripts": {
     "clean": "rm -rf ./dist",
     "build": "tsc",
-    "prepublishOnly": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build && npm version patch",
     "build-example": "npm run prepublishOnly && node ./node_modules/.bin/webpack --config ./example/webpack.config.js",
     "start-example": "npx webpack serve -c ./example/webpack.config.js"
   },

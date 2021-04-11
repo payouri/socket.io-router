@@ -21,6 +21,7 @@ import {
 } from "@commons/types";
 import createResponse from "./utils/createResponse";
 import { buildRequest } from "./utils/buildRequest";
+export * from "@commons/types";
 
 const routerDefaultOptions: DefaultRouterOptions = {
   mountPath: "/",

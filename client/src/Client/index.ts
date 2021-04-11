@@ -5,6 +5,7 @@ import {
   SocketMessageBody,
   SocketErrorMessage,
 } from "@commons/types";
+export * from "@commons/types";
 
 function wrapEmit<R extends SocketMessageBody = SocketMessageBody>(
   socket: Socket,
