@@ -1,6 +1,6 @@
 {
   "name": "@youri-kane/socket.io-router-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dedicated client for @youri-kane/socket.io-router package",
   "author": {
     "email": "pailloux.youri@gmail.com",

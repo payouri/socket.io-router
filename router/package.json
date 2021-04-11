@@ -1,6 +1,6 @@
 {
   "name": "@youri-kane/socket.io-router",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Socket.io router like api",
   "author": {
     "email": "pailloux.youri@gmail.com",
